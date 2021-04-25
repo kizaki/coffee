@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FirstCoffeeScript!</title>
+  </head>
+  <body>
+    <script src="coffeescript.js" type="text/javascript"></script>
+    <script type="text/coffeescript">
+      class Man
+        constructor: (@name, @age) ->
+
+        greet: (arg) ->
+          alert 'Hello I\'m ' + @name + "!";
+
+      h = new Man "kizaki", 37
+      h.greet()
+    </script>
+  </body>
+</html>
