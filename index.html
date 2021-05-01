@@ -72,12 +72,9 @@
     
   </head>
   <body>
+    <span id="createdAt"></span><br />
+    <span id="updatedAt"></span><br />
     
-
-
-
-    
-    <div 
 
     <div class="button dropdown"> 
       <select id="point">
@@ -169,7 +166,7 @@
           point.options[30].selected = true if "#{i}.#{j}" is "3.0"
     </script>
     -->
-    
+    <!--
     <script type="text/javascript">
       let point = document.getElementById('point');
 
@@ -185,8 +182,16 @@
         }
       }
     </script>
+    -->
 
     <script type="text/coffeescript">
+      
+      $(window).load ->
+        createdAt = document.getElementById 'createdAt'
+        today = new Date()
+        # 日付のフォーマット(YYYY/MM/DD HH24:MI:SS)
+        createdAt.innerHTML = getNowDateWithString()
+
       # ドロップダウンの点数を生成する
       point = document.getElementById 'point'
       document.createElement 'option'
@@ -198,11 +203,35 @@
           point.appendChild option
           if "#{i}.#{j}" is "5.0" then break
           point.options[30].selected = true if "#{i}.#{j}" is "3.0"
-    </script>    
-    
-    
+      
+      # 現在時刻を取得
+      getNowDateWithString = () ->
+        dt = new Date()
+        y = dt.getFullYear()
+        m = (dt.getMonth()+1)
+        d = dt.getDate()
+        h = dt.getHours()
+        mi = dt.getMinutes()
+        s = dt.getSeconds()
+        y + "/" + m + "/" + d + " " + h + ":" + mi + ":" + s
+      
+      # 取得した時刻を変換（登録日を分まで表示する）
+      translateTimestamp = (updatedAt) ->
+        dt = new Date(updatedAt)
+        y = dt.getFullYear()
+        m = (dt.getMonth()+1)
+        d = dt.getDate()
+        h = dt.getHours()
+        mi = dt.getMinutes()
+        s = dt.getSeconds()
+        y + "/" + m + "/" + d + " " + h + ":" + mi
+      
+      updatedAt.innerHTML = translateTimestamp("2021/5/1 19:50:48")
+      
+    </script>
+
     <p>基本デザイン</p>
+    <input type="button" class="btn btn-danger" id="btn01" value="キャンセル">
     <input type="button" class="btn btn-primary" id="btn01" value="完了">
-    <p>class = "btn btn-primary"</p>
   </body>
 </html>
